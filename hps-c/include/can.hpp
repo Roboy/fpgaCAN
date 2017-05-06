@@ -30,6 +30,8 @@ void read_regs_can(void *base);
 
 void send_msg(void *base, unsigned char *vector, unsigned int id, unsigned char long_bytes_msg,  unsigned char rtr);
 
+void receive_msg(void *base, unsigned char *vector, unsigned int id, unsigned char long_bytes_msg);
+
 void can_init(void *base);
 
 void config_timing_reg(void *base);

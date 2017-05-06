@@ -12,8 +12,11 @@ void reset_mode(void *base)
 void op_mode(void *base)
 {
     uint8_t temp = read_control(base);
+    temp = 0x1;
     IOWR_32DIRECT(base,0, (0xFE & temp));
     temp = read_control(base);
+    temp = 0x0;
+	IOWR_32DIRECT(base,0, (0xFE & temp));
 }
 
 unsigned char read_status(void *base)
@@ -90,13 +93,17 @@ void send_msg(void *base, unsigned char *vector, unsigned int id, unsigned char 
     // sending request
     IOWR(base,1,0x01);
 
-//    while(status != Bus_Tx_libre)
-//    {
-//        status = read_status(base);
-//        status = status & Bus_Tx_libre;
-//    }
+    do
+    {
+        status = read_status(base);
+        usleep(100000);
+    }while(status != 0x4);
 
-    printf("Msg Sended \n");
+    printf("Msg Sent \n");
+}
+
+void receive_msg(void *base, unsigned char *vector, unsigned int id, unsigned char long_bytes_msg){
+	IOWR(base,1,0x02);
 }
 
 void can_init(void *base)

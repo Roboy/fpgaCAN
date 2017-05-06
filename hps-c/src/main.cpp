@@ -55,6 +55,13 @@ int main(int argc, char *argv[]) {
 	      can_init(h2p_lw_can_addr);
 //	      read_status(h2p_lw_can_addr);
 //
+	      uint8_t status;
+	      do
+		  {
+			  status = read_status(h2p_lw_can_addr);
+			  usleep(100000);
+		  }while(status != 0x4);
+
 //	      uint8_t can_tx[8];
 //	      can_tx[0]= 0x0F;
 //	      can_tx[1]= 0x0E;
@@ -64,6 +71,9 @@ int main(int argc, char *argv[]) {
 //	      can_tx[5]= 0x0A;
 //	      can_tx[6]= 0xF1;
 //	      can_tx[7]= 0xF7;
+
+//	      send_msg(h2p_lw_can_addr, can_tx, 0x0001, 0x08, 0);
+//	      receive_msg(h2p_lw_can_addr, can_tx, 0x0001, 0x08);
 //
 //	      reset_mode(h2p_lw_can_addr);
 //	      read_regs_can(h2p_lw_can_addr);
