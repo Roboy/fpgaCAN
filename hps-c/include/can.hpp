@@ -21,10 +21,16 @@
 
 void reset_mode(void *base);
 
-void op_mode(void *base);
+void operation_mode(void *base);
 
-unsigned char read_status(void *base);
-unsigned char read_control(void *base);
+uint8_t read_mode(void *base);
+uint8_t read_command(void *base);
+uint8_t read_status(void *base);
+uint8_t read_interrupt_enable_register(void *base);
+uint8_t read_arbitraion_lost_capture_register(void *base);
+uint8_t read_error_capture_register(void *base);
+void read_acceptance_code_register(void *base);
+void read_acceptance_mask_register(void *base);
 
 void read_regs_can(void *base);
 

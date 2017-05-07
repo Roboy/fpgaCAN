@@ -7,7 +7,6 @@
    <irq preferredWidth="63" />
   </columns>
  </systemtable>
- <library
-   expandedCategories="Project,Library/Interface Protocols/Transceiver PLL,Library/Basic Functions/Clocks; PLLs and Resets/PLL,Library/University Program/Clock,Library/Basic Functions/Clocks; PLLs and Resets,Library/University Program,Library/Basic Functions,Library,Library/Interface Protocols" />
+ <library expandedCategories="Project,Library" />
  <window width="1855" height="1056" x="65" y="24" />
 </preferences>

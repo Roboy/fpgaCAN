@@ -8,6 +8,7 @@ module soc_system (
 		input  wire        can_0_conduit_end_can_rx,              //              can_0_conduit_end.can_rx
 		output wire        can_0_conduit_end_can_tx,              //                               .can_tx
 		input  wire        can_0_conduit_end_can_clk,             //                               .can_clk
+		input  wire        can_0_conduit_end_can_reset,           //                               .can_reset
 		input  wire        clk_clk,                               //                            clk.clk
 		input  wire [3:0]  dipsw_pio_external_connection_export,  //  dipsw_pio_external_connection.export
 		input  wire        hps_0_f2h_cold_reset_req_reset_n,      //       hps_0_f2h_cold_reset_req.reset_n
@@ -274,7 +275,8 @@ module soc_system (
 		.av_reset         (rst_controller_reset_out_reset),         //  reset_sink.reset
 		.CAN_rx           (can_0_conduit_end_can_rx),               // conduit_end.can_rx
 		.CAN_tx           (can_0_conduit_end_can_tx),               //            .can_tx
-		.CAN_clk          (can_0_conduit_end_can_clk)               //            .can_clk
+		.CAN_clk          (can_0_conduit_end_can_clk),              //            .can_clk
+		.CAN_reset        (can_0_conduit_end_can_reset)             //            .can_reset
 	);
 
 	soc_system_button_pio button_pio (

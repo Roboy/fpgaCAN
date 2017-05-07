@@ -140,11 +140,18 @@ module ghrd(
   assign LED[7:1] = fpga_led_internal;
   assign fpga_clk_50=FPGA_CLK1_50;
   assign stm_hw_events    = {{15{1'b0}}, SW, fpga_led_internal, fpga_debounced_buttons};
-
+	
 
 //=======================================================
 //  Structural coding
 //=======================================================
+	wire can_clock_40MHz;
+	
+pll can_clock(
+	.refclk(FPGA_CLK1_50 ),   //  refclk.clk
+	.rst(~hps_fpga_reset_n ),      //   reset.reset
+	.outclk_0(can_clock_40MHz)  // outclk0.clk
+);
 
 
  soc_system u0 (
@@ -153,7 +160,8 @@ module ghrd(
 	  .reset_reset_n                         (hps_fpga_reset_n ),                         //                          reset.reset_n
 	  .can_0_conduit_end_can_rx					(GPIO_0[0]),
 	  .can_0_conduit_end_can_tx					(GPIO_0[1]),
-	  .can_0_conduit_end_can_clk					(FPGA_CLK1_50),
+	  .can_0_conduit_end_can_clk					(can_clock_40MHz),
+	  .can_0_conduit_end_can_reset				(~KEY[1]),
 	  //HPS ddr3
 	  .memory_mem_a                          ( HPS_DDR3_ADDR),                       //                memory.mem_a
 	  .memory_mem_ba                         ( HPS_DDR3_BA),                         //                .mem_ba

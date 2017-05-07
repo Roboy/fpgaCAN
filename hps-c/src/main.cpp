@@ -47,30 +47,41 @@ int main(int argc, char *argv[]) {
 	      unsigned int temp;
 
 	      read_status(h2p_lw_can_addr);
+	      read_mode(h2p_lw_can_addr);
 //	      reset_mode(h2p_lw_can_addr);
-//	      read_status(h2p_lw_can_addr);
-//	      op_mode(h2p_lw_can_addr);
+	      read_interrupt_enable_register(h2p_lw_can_addr);
+	      read_acceptance_code_register(h2p_lw_can_addr);
+	      read_acceptance_mask_register(h2p_lw_can_addr);
 //	      read_status(h2p_lw_can_addr);
 //
-	      can_init(h2p_lw_can_addr);
-//	      read_status(h2p_lw_can_addr);
+//		  uint8_t can_tx[8];
+//		  can_tx[0]= 0x01;
+//		  can_tx[1]= 0x02;
+//		  can_tx[2]= 0x03;
+//		  can_tx[3]= 0x04;
+//		  can_tx[4]= 0x05;
+//		  can_tx[5]= 0x06;
+//		  can_tx[6]= 0x07;
+//		  can_tx[7]= 0x08;
+////
+//		  send_msg(h2p_lw_can_addr, can_tx, 0x0001, 0x08, 0);
 //
 	      uint8_t status;
 	      do
 		  {
+//	    	  IOWR(h2p_lw_can_addr,1,1);
 			  status = read_status(h2p_lw_can_addr);
+//			  if((status&0x40)){
+//				  read_error_capture_register(h2p_lw_can_addr);
+//				  reset_mode(h2p_lw_can_addr);
+//				  usleep(1000000);
+//			  }
+			  read_regs_can(h2p_lw_can_addr);
 			  usleep(100000);
+
 		  }while(status != 0x4);
 
-//	      uint8_t can_tx[8];
-//	      can_tx[0]= 0x0F;
-//	      can_tx[1]= 0x0E;
-//	      can_tx[2]= 0x0D;
-//	      can_tx[3]= 0x0C;
-//	      can_tx[4]= 0x0B;
-//	      can_tx[5]= 0x0A;
-//	      can_tx[6]= 0xF1;
-//	      can_tx[7]= 0xF7;
+
 
 //	      send_msg(h2p_lw_can_addr, can_tx, 0x0001, 0x08, 0);
 //	      receive_msg(h2p_lw_can_addr, can_tx, 0x0001, 0x08);
